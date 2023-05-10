@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Raleway:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/script.js"></script>
+    <title>Credit Card Validator</title>
+</head>
+
+<body>
+    <div id="main-wrapper">
+        <h1>Validate a credit card number</h1>
+        <p>Check a credit card with Luhn Algorithm online.</p>
+        <form id="validator" class="validator">
+            <label for="creditCard"></label>
+            <input class="cardNumberInput" type="text" id="creditCardNumberInput" placeholder="Enter credit card number">
+            <button type="submit">Validate</button>
+        </form>
+        <section>
+            <table class="cardValidationResult">
+                <tbody>
+                    <tr>
+                        <td>Luhn Algorithm Check:</td>
+                        <td><span id="passLuhn"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Issuer identification number (IIN):</td>
+                        <td><span id="issuer"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <div class="explanation">
+            <h2>How to validate a Credit Card number?</h2>
+            <p>The Luhn formula is a simple algorithm used to validate credit card numbers.</p>
+            <h3>How Luhn Algorithm works?</h3>
+            <ul>
+                <li>Drop the last digit from the number. It is the control number.</li>
+                <li>Starting from right double every odd number (1, 3, 5...).</li>
+                <li>If multiplied number is greater than 9, subtract 9 from it.</li>
+                <li>Add all the numbers together.</li>
+                <li>Add to the sum the control number</li>
+                <li>If the final sum is a multiple of 10 (ends with 0), then provided number is considered valid
+                    according
+                    to the Luhn formula.</li>
+            </ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th colspan="16"></th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Provided number</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>3</td>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>8</td>
+                        <td>6</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Drop the last digit</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>3</td>
+                        <td>7</td>
+                        <td>5</td>
+                        <td>8</td>
+                        <td>6</td>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>5</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Double odd digits</td>
+                        <td>8</td>
+                        <td>5</td>
+                        <td>10</td>
+                        <td>6</td>
+                        <td>14</td>
+                        <td>3</td>
+                        <td>14</td>
+                        <td>5</td>
+                        <td>16</td>
+                        <td>6</td>
+                        <td>16</td>
+                        <td>9</td>
+                        <td>18</td>
+                        <td>8</td>
+                        <td>10</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Subtract 9 from numbers > 9</td>
+                        <td>8</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>6</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>1</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Add all numbers</td>
+                        <td>8</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>6</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>5</td>
+                        <td>7</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>9</td>
+                        <td>9</td>
+                        <td>8</td>
+                        <td>1</td>
+                        <td></td>
+                        <td><strong>85</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Final sum modulo 10</td>
+                        <td colspan="16">90 modulo 10 = 0</td>
+                        <td><strong>0</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <h3>Issuer identification number (IIN)</h3>
+            <p>The first six digits of a card number identify the institution that issued the card to the card holder.
+            </p>
+            <p>Credit Cards Providers</p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Issuer</th>
+                        <th>Starting Numbers (IIN)</th>
+                        <th>Length</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>American Express</td>
+                        <td>34, 37</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>Diners Club</td>
+                        <td>300, 301, 302, 303, 304, 305, 36</td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td>Discover</td>
+                        <td>6011, 622126 to 622925, 644, 645, 646, 647, 648, 649, 65</td>
+                        <td>16-19</td>
+                    </tr>
+                    <tr>
+                        <td>InstaPayment</td>
+                        <td>637, 638, 639</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td>JCB</td>
+                        <td>3528 to 3589</td>
+                        <td>16-19</td>
+                    </tr>
+                    <tr>
+                        <td>Maestro</td>
+                        <td>5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, 6763</td>
+                        <td>16-19</td>
+                    </tr>
+                    <tr>
+                        <td>MasterCard</td>
+                        <td>51, 52, 53, 54, 55, 222100-272099</td>
+                        <td>16</td>
+                    </tr>
+                    <tr>
+                        <td>Visa</td>
+                        <td>4</td>
+                        <td>13-16-19</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer>
+            <p>Created by Solracss</p>
+        </footer>
+    </div>
+</body>
+
+</html>
